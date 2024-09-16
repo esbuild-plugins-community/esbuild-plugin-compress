@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  '@mongodb-js/zstd':
+    specifier: ^1.2.1
+    version: 1.2.1
+
 devDependencies:
   '@espcom/eslint-config':
     specifier: 0.0.8
@@ -444,6 +449,72 @@ packages:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
     dev: true
+
+  /@mongodb-js/zstd-darwin-arm64@1.2.1:
+    resolution: {integrity: sha512-3WRiynS0kicXC2YzpbWLqKG6SCX8hd0o4G2PjeY5mkg15ruAnZMoZmWLR+EcF++h7U0yggoBuQIQOY0f2T+pVQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@mongodb-js/zstd-linux-arm64-gnu@1.2.1:
+    resolution: {integrity: sha512-Rh4UFAhBY/8fMBSf1qzJQj/RWwTecj85vsd+yxWpt7dEZd4ink3KKxwXMX+cHOvxFyclgs0uWcqtS57H8qVAfQ==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@mongodb-js/zstd-linux-arm64-musl@1.2.1:
+    resolution: {integrity: sha512-ZGHIrLONwUJlUQIATz5R7hR/QbQDAIOSlYHjz71xfYrA4YIUe/Pjo8S1cHSC6RzAWXAjm6fv0WKx5Bq7mTTj0Q==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@mongodb-js/zstd-linux-x64-gnu@1.2.1:
+    resolution: {integrity: sha512-NlOPKs+SCjhZW1/z2MfSXV53y5KBYiSr+NJFYFlAuDvDbb39wvGRH3oadh8UHM+pB6Ginjwtu3qCQqKy3s+zFw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@mongodb-js/zstd-linux-x64-musl@1.2.1:
+    resolution: {integrity: sha512-7rX8FT2Y3r4dmW+Brk2kTAUEldU/wpIa6tasY4nY8r5ufPgJsAAfvJwPIyiVPByPWlkpgtIfa04D/fJnELOf2w==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@mongodb-js/zstd-win32-x64-msvc@1.2.1:
+    resolution: {integrity: sha512-T4uJOynCjuJXmJuW5wbYIjxiwzzF6lE6q1EWhb8/GZvs/GKBgy47lrX5vaTIRY4shQwAiYE9aMDOVdTOV0icXg==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  /@mongodb-js/zstd@1.2.1:
+    resolution: {integrity: sha512-m+N0N7Ju28P47JfoqOReCW/8mqdWK7+K38muVW0tacXEcNSE3atFEXLabXMoPaAY76KZ21DC11EcB2ehmxW3rQ==}
+    engines: {node: '>= 10'}
+    optionalDependencies:
+      '@mongodb-js/zstd-darwin-arm64': 1.2.1
+      '@mongodb-js/zstd-linux-arm64-gnu': 1.2.1
+      '@mongodb-js/zstd-linux-arm64-musl': 1.2.1
+      '@mongodb-js/zstd-linux-x64-gnu': 1.2.1
+      '@mongodb-js/zstd-linux-x64-musl': 1.2.1
+      '@mongodb-js/zstd-win32-x64-msvc': 1.2.1
+    dev: false
 
   /@nodelib/fs.scandir@2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
