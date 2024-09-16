@@ -1,3 +1,13 @@
+import { OutputFile } from 'esbuild';
+
+export type TypeCompressionLevel = 'low' | 'high' | 'max';
+
 export type TypeOptions = {
-  param?: string;
+  gzip?: boolean;
+  brotli?: boolean;
+  zstd?: boolean;
+  level?: TypeCompressionLevel;
+  extensions?: Array<string>;
 };
+
+export type TypeCompressResult = Omit<OutputFile, 'text'>;
