@@ -3,7 +3,7 @@ import * as path from 'node:path';
 import * as assert from 'node:assert/strict';
 import { describe, it, afterEach, before } from 'node:test';
 
-import { build, BuildOptions } from 'esbuild';
+import { build, BuildOptions, context } from 'esbuild';
 
 import { pluginCompress } from '../src/index.js';
 
@@ -126,5 +126,51 @@ void describe('Plugin test', async () => {
         true
       );
     }
+  });
+
+  await it('works in rebuild mode', async () => {
+    await fs.promises.copyFile(
+      path.resolve('test/res/entry.ts'),
+      path.resolve('test/tmp/entry.ts')
+    );
+    await fs.promises.copyFile(
+      path.resolve('test/res/global.css'),
+      path.resolve('test/tmp/global.css')
+    );
+
+    const ctx = await context({
+      ...getConfig([
+        pluginCompress({
+          extensions: ['.js', '.css'],
+          gzip: true,
+          level: 'low',
+        }),
+      ]),
+      entryPoints: [path.resolve('test/tmp/entry.ts')],
+    });
+
+    const results: Record<string, Date> = {};
+
+    const { outputFiles: outputFilesBefore } = await ctx.rebuild();
+    for (const outputFile of outputFilesBefore!) {
+      // eslint-disable-next-line no-await-in-loop
+      const { mtime } = await fs.promises.stat(outputFile.path);
+      results[outputFile.path] = mtime;
+    }
+
+    await fs.promises.writeFile(
+      path.resolve('test/tmp/entry.ts'),
+      `import './global.css';`,
+      'utf-8'
+    );
+
+    const { outputFiles: outputFilesAfter } = await ctx.rebuild();
+    for (const outputFile of outputFilesAfter!) {
+      // eslint-disable-next-line no-await-in-loop
+      const { mtime } = await fs.promises.stat(outputFile.path);
+      assert.notEqual(mtime, results[outputFile.path], path.basename(outputFile.path));
+    }
+
+    await ctx.dispose();
   });
 });
