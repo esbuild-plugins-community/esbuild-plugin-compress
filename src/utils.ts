@@ -1,3 +1,6 @@
+import * as path from 'node:path';
+import * as fs from 'node:fs/promises';
+
 import { TypeCompressionLevel } from './types.js';
 
 /*
@@ -25,4 +28,35 @@ export const getCompressionLevel = (level: TypeCompressionLevel) => {
     },
   };
   return levels[level];
+};
+
+export async function createDirectoryIfNotExists(dir: string) {
+  try {
+    await fs.access(dir);
+  } catch (error) {
+    // @ts-ignore
+    if (error.code === 'ENOENT') {
+      await fs.mkdir(dir, { recursive: true });
+    }
+  }
+}
+
+export const writeFile = async (filepath: string, contents: any) => {
+  const dir = path.dirname(filepath);
+  try {
+    await createDirectoryIfNotExists(dir);
+    await fs.writeFile(filepath, contents, 'utf-8');
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+export const unlinkFile = async (filePath: string) => {
+  try {
+    await fs.unlink(filePath);
+    return true;
+  } catch {
+    return false;
+  }
 };
