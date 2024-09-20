@@ -1,21 +1,27 @@
 import { TypeCompressionLevel } from './types.js';
 
+/*
+compression levels:
+  gzip: 1 - 9
+  brotli: 1 - 11
+  zstd: (-7) - 22
+*/
 export const getCompressionLevel = (level: TypeCompressionLevel) => {
   const levels = {
     low: {
-      brotli: 1,
-      gzip: 1,
+      gzip: 3,
+      brotli: 3,
       zstd: 3,
     },
     high: {
-      brotli: 8,
-      gzip: 8,
-      zstd: 18,
+      gzip: 7,
+      brotli: 9,
+      zstd: 19,
     },
     max: {
-      brotli: 9,
       gzip: 9,
-      zstd: 19,
+      brotli: 11,
+      zstd: 22,
     },
   };
   return levels[level];
