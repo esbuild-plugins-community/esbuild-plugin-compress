@@ -9,6 +9,15 @@
     "type": "git",
     "url": "git+https://github.com/esbuild-plugins-community/esbuild-plugin-compress"
   },
+  "keywords": [
+    "esbuild",
+    "esbuild-plugin",
+    "plugin",
+    "compress",
+    "brotli",
+    "gzip",
+    "zstd"
+  ],
   "scripts": {
     "prepare": "husky",
     "prepublishOnly": "pnpm run analyze:js&&pnpm run check-types&&pnpm run test",
