@@ -1,7 +1,7 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as assert from 'node:assert/strict';
-import { describe, it, afterEach, before } from 'node:test';
+import { describe, it, afterEach, before, after } from 'node:test';
 
 import { build, BuildOptions, context } from 'esbuild';
 
@@ -35,6 +35,10 @@ void describe('Plugin test', async () => {
       // eslint-disable-next-line no-await-in-loop
       await unlinkFile(path.resolve('test/tmp', file));
     }
+  });
+
+  after(async () => {
+    fs.rmSync(path.resolve('test/tmp'), { recursive: true, force: true });
   });
 
   await it('valid compress js and css files', async () => {
@@ -163,5 +167,23 @@ void describe('Plugin test', async () => {
     }
 
     await ctx.dispose();
+  });
+
+  await it('check with dynamic folder', async () => {
+    try {
+      await build({
+        ...getConfig([
+          pluginCompress({
+            extensions: ['.js'],
+            zstd: true,
+            level: 'low',
+          }),
+        ]),
+        entryNames: '[ext]/[name]',
+        assetNames: '[ext]/[name]',
+      });
+    } catch (err) {
+      assert.equal((err as Error).message.includes('ENOENT'), false);
+    }
   });
 });
