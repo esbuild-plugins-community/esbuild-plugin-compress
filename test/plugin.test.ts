@@ -6,17 +6,7 @@ import { describe, it, afterEach, before } from 'node:test';
 import { build, BuildOptions, context } from 'esbuild';
 
 import { pluginCompress } from '../src/index.js';
-
-async function createDirectoryIfNotExists(dir: string) {
-  try {
-    await fs.promises.access(dir);
-  } catch (error) {
-    // @ts-ignore
-    if (error.code === 'ENOENT') {
-      await fs.promises.mkdir(dir, { recursive: true });
-    }
-  }
-}
+import { createDirectoryIfNotExists, unlinkFile } from '../src/utils.js';
 
 void describe('Plugin test', async () => {
   const getConfig = (plugins?: BuildOptions['plugins']): BuildOptions => ({
@@ -42,7 +32,8 @@ void describe('Plugin test', async () => {
     const files = fs.readdirSync(path.resolve('test/tmp'));
 
     for (const file of files) {
-      fs.unlinkSync(path.resolve('test/tmp', file));
+      // eslint-disable-next-line no-await-in-loop
+      await unlinkFile(path.resolve('test/tmp', file));
     }
   });
 

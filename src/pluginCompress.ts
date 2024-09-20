@@ -10,7 +10,7 @@ import { TypeCompressResult, TypeOptions } from './types.js';
 import { pluginName } from './constants.js';
 import { validateOptions } from './validators/validateOptions.js';
 import { validateSetup } from './validators/validateSetup.js';
-import { getCompressionLevel } from './utils.js';
+import { getCompressionLevel, writeFile } from './utils.js';
 
 const gzipCompress = async (file: OutputFile, level?: number): Promise<TypeCompressResult> => {
   const ext = '.gz';
@@ -89,25 +89,21 @@ export const pluginCompress = (optionsRaw?: TypeOptions): Plugin => {
         if (!result.outputFiles) return;
 
         const tasks: Array<Promise<TypeCompressResult>> = [];
-        const {
-          gzip: gzipLevel,
-          brotli: brotliLevel,
-          zstd: zstdLevel,
-        } = getCompressionLevel(opts.level);
+        const compressionLevel = getCompressionLevel(opts.level);
 
         for (const file of result.outputFiles) {
           if (!opts.extensions.some((ext) => ext === path.extname(file.path))) continue;
 
           if (opts.gzip) {
-            tasks.push(gzipCompress(file, gzipLevel));
+            tasks.push(gzipCompress(file, compressionLevel.gzip));
           }
 
           if (opts.brotli) {
-            tasks.push(brotliCompress(file, brotliLevel));
+            tasks.push(brotliCompress(file, compressionLevel.brotli));
           }
 
           if (opts.zstd) {
-            tasks.push(zstdCompress(file, zstdLevel));
+            tasks.push(zstdCompress(file, compressionLevel.zstd));
           }
         }
 
@@ -116,12 +112,12 @@ export const pluginCompress = (optionsRaw?: TypeOptions): Plugin => {
         // write output files because write: false
         for (const outputFile of result.outputFiles) {
           // eslint-disable-next-line no-await-in-loop
-          await fs.writeFile(outputFile.path, outputFile.contents);
+          await writeFile(outputFile.path, outputFile.contents);
         }
 
         for (const file of files) {
           // eslint-disable-next-line no-await-in-loop
-          await fs.writeFile(file.path, file.contents);
+          await writeFile(file.path, file.contents);
 
           result.outputFiles.push({
             path: file.path,
