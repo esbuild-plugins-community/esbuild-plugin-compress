@@ -17,21 +17,21 @@
     "check-types": "tsc --noEmit",
     "build": "rm -rf ./dist&&tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json&&node --import tsx ./scripts/genPackageFiles.ts&&pnpm run gen-size-badge",
     "build-watch": "rm -rf ./dist&&tsc -b ./tsconfig.cjs.json ./tsconfig.esm.json ./tsconfig.types.json --watch&&node --import tsx ./scripts/genPackageFiles.ts",
-    "test": "pnpm run build&&node --test --test-reporter=spec ./test/import*.*js&&c8 node --import tsx --test ./test/*.test.*&&pnpm run gen-coverage-badge",
+    "test": "pnpm run build&&node --test --test-reporter=spec ./test/import*.*js&&c8 node --import tsx --test --test-reporter=spec ./test/*.test.*&&pnpm run gen-coverage-badge",
     "test-watch": "pnpm run build&&node --import tsx --test --test-reporter=spec --watch ./test/*.test.*",
     "gen-coverage-badge": "node --import tsx ./scripts/genCoverageBadge.ts",
     "gen-size-badge": "node --import tsx ./scripts/genSizeBadges.ts"
   },
   "devDependencies": {
     "@espcom/eslint-config": "0.0.8",
-    "@types/node": "22.5.1",
+    "@types/node": "22.5.5",
     "badge-maker": "4.0.0",
     "c8": "10.1.2",
     "esbuild": "0.23.1",
-    "husky": "9.1.5",
-    "lint-staged": "15.2.9",
-    "tsx": "4.19.0",
-    "typescript": "5.5.4",
+    "husky": "9.1.6",
+    "lint-staged": "15.2.10",
+    "tsx": "4.19.1",
+    "typescript": "5.6.2",
     "xml-splitter": "1.2.1"
   },
   "peerDependencies": {
@@ -49,6 +49,6 @@
   "types": "dist/types/index.d.ts",
   "packageManager": "pnpm@8.6.3",
   "dependencies": {
-    "@mongodb-js/zstd": "^1.2.1"
+    "@mongodb-js/zstd": "^1.2.2"
   }
 }
