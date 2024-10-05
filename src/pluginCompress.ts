@@ -1,4 +1,3 @@
-import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { Buffer } from 'node:buffer';
 import * as zlib from 'node:zlib';
