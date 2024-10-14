@@ -58,6 +58,6 @@
   "types": "dist/types/index.d.ts",
   "packageManager": "pnpm@8.6.3",
   "dependencies": {
-    "@mongodb-js/zstd": "^1.2.0"
+    "@mongodb-js/zstd": "1.2.0"
   }
 }
