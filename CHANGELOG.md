@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/esbuild-plugins-community/esbuild-plugin-compress/compare/v1.0.1...v1.1.0) (2024-10-17)
+
+
+### Features
+
+* correcting compress levels ([ddae2d7](https://github.com/esbuild-plugins-community/esbuild-plugin-compress/commit/ddae2d7e86907c7c677b6bdc6b3fde7a189276d6))
+
+
+### Bug Fixes
+
+* @mongodb-js/zstd version ([fd71e34](https://github.com/esbuild-plugins-community/esbuild-plugin-compress/commit/fd71e34cc3e8469511045de459916bbebb224c35))
+* drop @mongodb-js/zstd version ([2f3061a](https://github.com/esbuild-plugins-community/esbuild-plugin-compress/commit/2f3061a7f21bbe7c0260dd86c592d0ddc13f45f7))
+* remove unused import ([c8126c6](https://github.com/esbuild-plugins-community/esbuild-plugin-compress/commit/c8126c6d4fe80d860b14deacf7e7036966e30ff4))
+
 ## [1.0.1](https://github.com/esbuild-plugins-community/esbuild-plugin-compress/compare/v1.0.0...v1.0.1) (2024-09-20)
 
 
