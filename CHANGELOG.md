@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/esbuild-plugins-community/esbuild-plugin-compress/compare/v1.1.0...v1.2.0) (2025-06-06)
+
+
+### Features
+
+* bump @mongodb-js/zstd to 2.0.1 ([6a3fcad](https://github.com/esbuild-plugins-community/esbuild-plugin-compress/commit/6a3fcad4772cdc700497b97632df4015c43fdbb7))
+
 ## [1.1.0](https://github.com/esbuild-plugins-community/esbuild-plugin-compress/compare/v1.0.1...v1.1.0) (2024-10-17)
 
 
